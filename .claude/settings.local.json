@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(document-skills:frontend-design)",
+      "Skill(document-skills:frontend-design:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run dev:*)",
+      "Bash(npm run build:*)",
+      "Bash(dir /b:*)",
+      "Bash(git init:*)",
+      "Bash(git add:*)"
+    ]
+  }
+}

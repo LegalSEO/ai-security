@@ -1,0 +1,879 @@
+import { useState } from 'react'
+import {
+  Shield,
+  Bot,
+  Zap,
+  Lock,
+  AlertTriangle,
+  CheckCircle2,
+  XCircle,
+  Search,
+  FileText,
+  BookOpen,
+  ArrowRight,
+  ExternalLink,
+  Mail,
+  Menu,
+  X,
+  ChevronRight,
+  Globe,
+  Server,
+  Code,
+  ShieldCheck,
+  ShieldAlert,
+  Eye,
+  Clock,
+  TrendingUp,
+  Users,
+  Award,
+  Sparkles
+} from 'lucide-react'
+
+// Navigation Component
+function Navigation() {
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-aegis-900/80 backdrop-blur-xl border-b border-white/5">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 md:h-20">
+          {/* Logo */}
+          <a href="#" className="flex items-center gap-3 group">
+            <div className="relative">
+              <Shield className="w-8 h-8 text-shield-400 transition-transform group-hover:scale-110" />
+              <div className="absolute inset-0 bg-shield-400/20 blur-xl rounded-full" />
+            </div>
+            <span className="font-display font-bold text-xl tracking-tight">
+              Aegis<span className="text-shield-400">Security</span>
+            </span>
+          </a>
+
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center gap-8">
+            <a href="#problem" className="text-sm text-gray-400 hover:text-white transition-colors">The Threat</a>
+            <a href="#scanner" className="text-sm text-gray-400 hover:text-white transition-colors">Free Scanner</a>
+            <a href="#audit" className="text-sm text-gray-400 hover:text-white transition-colors">Security Audit</a>
+            <a href="#resources" className="text-sm text-gray-400 hover:text-white transition-colors">Resources</a>
+            <a href="#pricing" className="text-sm text-gray-400 hover:text-white transition-colors">Pricing</a>
+          </div>
+
+          {/* CTA Button */}
+          <div className="hidden md:block">
+            <a
+              href="#scanner"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-shield-500 hover:bg-shield-400 text-white font-semibold text-sm rounded-lg transition-all hover:shadow-lg hover:shadow-shield-500/25"
+            >
+              Scan Free
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden p-2 text-gray-400 hover:text-white"
+          >
+            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
+
+        {/* Mobile Menu */}
+        {isOpen && (
+          <div className="md:hidden py-4 border-t border-white/5">
+            <div className="flex flex-col gap-4">
+              <a href="#problem" className="text-gray-400 hover:text-white transition-colors" onClick={() => setIsOpen(false)}>The Threat</a>
+              <a href="#scanner" className="text-gray-400 hover:text-white transition-colors" onClick={() => setIsOpen(false)}>Free Scanner</a>
+              <a href="#audit" className="text-gray-400 hover:text-white transition-colors" onClick={() => setIsOpen(false)}>Security Audit</a>
+              <a href="#resources" className="text-gray-400 hover:text-white transition-colors" onClick={() => setIsOpen(false)}>Resources</a>
+              <a href="#pricing" className="text-gray-400 hover:text-white transition-colors" onClick={() => setIsOpen(false)}>Pricing</a>
+              <a
+                href="#scanner"
+                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-shield-500 text-white font-semibold text-sm rounded-lg"
+                onClick={() => setIsOpen(false)}
+              >
+                Scan Free
+                <ArrowRight className="w-4 h-4" />
+              </a>
+            </div>
+          </div>
+        )}
+      </div>
+    </nav>
+  )
+}
+
+// Hero Section
+function Hero() {
+  const [url, setUrl] = useState('')
+
+  return (
+    <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
+      {/* Background Effects */}
+      <div className="absolute inset-0 bg-grid-pattern bg-grid opacity-40" />
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-shield-500/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secure-500/10 rounded-full blur-3xl" />
+
+      {/* Animated gradient orb */}
+      <div className="absolute top-1/3 right-1/3 w-64 h-64 bg-gradient-to-r from-shield-500/20 to-secure-500/20 rounded-full blur-3xl animate-pulse-slow" />
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
+        <div className="max-w-4xl mx-auto text-center">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-threat-500/10 border border-threat-500/20 rounded-full mb-8 animate-fade-in">
+            <AlertTriangle className="w-4 h-4 text-threat-400" />
+            <span className="text-sm font-medium text-threat-400">AI-powered attacks increased 300% in 2024</span>
+          </div>
+
+          {/* Headline */}
+          <h1 className="font-display font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight mb-6 animate-slide-up">
+            Hackers Have AI Now.
+            <br />
+            <span className="text-gradient">Does Your Defense?</span>
+          </h1>
+
+          {/* Subheadline */}
+          <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 animate-slide-up delay-100">
+            Automated bots scan millions of websites daily looking for easy targets.
+            Our free security scanner shows you exactly what they see —
+            <span className="text-white font-medium"> before they attack.</span>
+          </p>
+
+          {/* Scanner Input */}
+          <div className="max-w-xl mx-auto animate-slide-up delay-200">
+            <div className="relative group">
+              <div className="absolute -inset-1 bg-gradient-to-r from-shield-500 to-secure-500 rounded-2xl blur opacity-25 group-hover:opacity-40 transition-opacity" />
+              <div className="relative flex flex-col sm:flex-row gap-3 p-2 bg-aegis-800 rounded-xl border border-white/10">
+                <div className="flex-1 flex items-center gap-3 px-4 py-3 bg-aegis-700 rounded-lg">
+                  <Globe className="w-5 h-5 text-gray-500 flex-shrink-0" />
+                  <input
+                    type="url"
+                    value={url}
+                    onChange={(e) => setUrl(e.target.value)}
+                    placeholder="Enter your website URL..."
+                    className="flex-1 bg-transparent text-white placeholder-gray-500 outline-none text-base"
+                  />
+                </div>
+                <button className="flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-shield-500 to-shield-600 hover:from-shield-400 hover:to-shield-500 text-white font-semibold rounded-lg transition-all shadow-lg shadow-shield-500/25 hover:shadow-shield-500/40">
+                  <Search className="w-5 h-5" />
+                  <span>Scan Free</span>
+                </button>
+              </div>
+            </div>
+            <p className="mt-4 text-sm text-gray-500">
+              No signup required. Results in 60 seconds.
+            </p>
+          </div>
+
+          {/* Trust Indicators */}
+          <div className="flex flex-wrap items-center justify-center gap-8 mt-16 animate-slide-up delay-300">
+            <div className="flex items-center gap-2 text-gray-400">
+              <ShieldCheck className="w-5 h-5 text-secure-400" />
+              <span className="text-sm">10,000+ sites scanned</span>
+            </div>
+            <div className="flex items-center gap-2 text-gray-400">
+              <Clock className="w-5 h-5 text-shield-400" />
+              <span className="text-sm">Results in 60 seconds</span>
+            </div>
+            <div className="flex items-center gap-2 text-gray-400">
+              <Lock className="w-5 h-5 text-secure-400" />
+              <span className="text-sm">100% private & secure</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Scroll indicator */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+        <div className="w-6 h-10 border-2 border-gray-600 rounded-full flex items-start justify-center p-1">
+          <div className="w-1.5 h-3 bg-gray-500 rounded-full animate-pulse" />
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// Problem Section
+function Problem() {
+  const threats = [
+    {
+      icon: Bot,
+      title: "AI-Powered Reconnaissance",
+      description: "Bots using GPT and machine learning now scan and catalog vulnerabilities 1000x faster than humans ever could.",
+      color: "threat"
+    },
+    {
+      icon: Zap,
+      title: "Automated Exploit Chains",
+      description: "AI can chain together multiple small vulnerabilities into devastating attacks — automatically, at scale.",
+      color: "critical"
+    },
+    {
+      icon: Code,
+      title: "Custom Malware Generation",
+      description: "Attackers use AI to generate unique, undetectable malware variants for each target site.",
+      color: "threat"
+    },
+    {
+      icon: Users,
+      title: "Social Engineering at Scale",
+      description: "AI crafts perfect phishing emails by analyzing your site's content, team, and customer base.",
+      color: "critical"
+    }
+  ]
+
+  return (
+    <section id="problem" className="relative py-24 md:py-32 overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-aegis-900 via-aegis-800 to-aegis-900" />
+      <div className="absolute inset-0 bg-grid-pattern bg-grid opacity-20" />
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="max-w-3xl mx-auto text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-critical-500/10 border border-critical-500/20 rounded-full mb-6">
+            <ShieldAlert className="w-4 h-4 text-critical-400" />
+            <span className="text-sm font-medium text-critical-400">The New Reality</span>
+          </div>
+          <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-6">
+            The Game Has
+            <span className="text-gradient-warm"> Changed</span>
+          </h2>
+          <p className="text-lg text-gray-400">
+            Hackers aren't manually typing commands anymore. They're deploying AI armies that
+            probe millions of websites simultaneously. Your site is being scanned right now —
+            <span className="text-white font-medium"> the question is whether you're ready.</span>
+          </p>
+        </div>
+
+        {/* Threat Cards */}
+        <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+          {threats.map((threat, index) => (
+            <div
+              key={index}
+              className="group relative p-6 md:p-8 bg-aegis-800/50 backdrop-blur border border-white/5 rounded-2xl hover:border-white/10 transition-all duration-300"
+            >
+              <div className="flex items-start gap-4">
+                <div className={`p-3 rounded-xl ${threat.color === 'threat' ? 'bg-threat-500/10' : 'bg-critical-500/10'}`}>
+                  <threat.icon className={`w-6 h-6 ${threat.color === 'threat' ? 'text-threat-400' : 'text-critical-400'}`} />
+                </div>
+                <div>
+                  <h3 className="font-display font-semibold text-lg md:text-xl mb-2 text-white group-hover:text-shield-400 transition-colors">
+                    {threat.title}
+                  </h3>
+                  <p className="text-gray-400 leading-relaxed">
+                    {threat.description}
+                  </p>
+                </div>
+              </div>
+
+              {/* Hover glow effect */}
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-threat-500/0 via-threat-500/5 to-critical-500/0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="mt-12 text-center">
+          <p className="text-gray-400 mb-6">
+            Still think your basic security plugins are enough?
+          </p>
+          <a
+            href="#scanner"
+            className="inline-flex items-center gap-2 text-shield-400 hover:text-shield-300 font-medium transition-colors"
+          >
+            Find out what hackers see
+            <ArrowRight className="w-4 h-4" />
+          </a>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// Scanner Section
+function Scanner() {
+  const scanResults = [
+    { label: "SSL Certificate", status: "pass", detail: "Valid until Dec 2025" },
+    { label: "Security Headers", status: "warning", detail: "3 headers missing" },
+    { label: "WordPress Version", status: "fail", detail: "Outdated (6.1.2)" },
+    { label: "Plugin Vulnerabilities", status: "fail", detail: "2 critical issues" },
+    { label: "Malware Detection", status: "pass", detail: "No threats found" },
+    { label: "Firewall Status", status: "warning", detail: "No WAF detected" },
+  ]
+
+  const features = [
+    {
+      icon: Server,
+      title: "Infrastructure Analysis",
+      description: "We check your hosting, SSL, DNS, and server configuration for misconfigurations."
+    },
+    {
+      icon: Code,
+      title: "CMS & Plugin Scan",
+      description: "WordPress, Shopify, Wix — we identify outdated software and known vulnerabilities."
+    },
+    {
+      icon: Eye,
+      title: "Threat Intelligence",
+      description: "Cross-reference your site against databases of compromised sites and blacklists."
+    },
+    {
+      icon: ShieldCheck,
+      title: "Security Headers",
+      description: "Verify your site has proper security headers to prevent common attacks."
+    }
+  ]
+
+  return (
+    <section id="scanner" className="relative py-24 md:py-32 overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-aegis-900 via-aegis-800/50 to-aegis-900" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-96 bg-shield-500/10 rounded-full blur-3xl" />
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="max-w-3xl mx-auto text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-shield-500/10 border border-shield-500/20 rounded-full mb-6">
+            <Search className="w-4 h-4 text-shield-400" />
+            <span className="text-sm font-medium text-shield-400">Free Security Scanner</span>
+          </div>
+          <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-6">
+            See What Hackers See —
+            <span className="text-gradient"> In 60 Seconds</span>
+          </h2>
+          <p className="text-lg text-gray-400">
+            Our scanner performs the same reconnaissance that attackers use to find vulnerable targets.
+            Get a comprehensive security snapshot — completely free.
+          </p>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Features */}
+          <div className="space-y-6">
+            {features.map((feature, index) => (
+              <div key={index} className="flex items-start gap-4 group">
+                <div className="p-3 bg-shield-500/10 rounded-xl group-hover:bg-shield-500/20 transition-colors">
+                  <feature.icon className="w-5 h-5 text-shield-400" />
+                </div>
+                <div>
+                  <h3 className="font-display font-semibold text-lg text-white mb-1">
+                    {feature.title}
+                  </h3>
+                  <p className="text-gray-400">
+                    {feature.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+
+            <div className="pt-6">
+              <a
+                href="#"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-shield-500 hover:bg-shield-400 text-white font-semibold rounded-xl transition-all shadow-lg shadow-shield-500/25"
+              >
+                <Search className="w-5 h-5" />
+                Start Your Free Scan
+              </a>
+            </div>
+          </div>
+
+          {/* Sample Report Preview */}
+          <div className="relative">
+            <div className="absolute -inset-4 bg-gradient-to-r from-shield-500/20 to-secure-500/20 rounded-3xl blur-2xl opacity-50" />
+            <div className="relative bg-aegis-800 border border-white/10 rounded-2xl overflow-hidden shadow-2xl">
+              {/* Report Header */}
+              <div className="p-4 border-b border-white/10 bg-aegis-700/50">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-3 h-3 rounded-full bg-critical-400" />
+                    <div className="w-3 h-3 rounded-full bg-threat-400" />
+                    <div className="w-3 h-3 rounded-full bg-secure-400" />
+                  </div>
+                  <span className="font-mono text-xs text-gray-500">example-site.com</span>
+                </div>
+              </div>
+
+              {/* Security Score */}
+              <div className="p-6 border-b border-white/10">
+                <div className="flex items-center justify-between mb-4">
+                  <span className="font-display font-semibold text-white">Security Score</span>
+                  <div className="flex items-center gap-2">
+                    <span className="font-display font-bold text-2xl text-threat-400">62</span>
+                    <span className="text-gray-500">/100</span>
+                  </div>
+                </div>
+                <div className="h-2 bg-aegis-700 rounded-full overflow-hidden">
+                  <div className="h-full w-[62%] bg-gradient-to-r from-critical-500 via-threat-500 to-threat-400 rounded-full" />
+                </div>
+                <p className="mt-2 text-sm text-threat-400">Moderate Risk — Action Required</p>
+              </div>
+
+              {/* Scan Results */}
+              <div className="p-4 space-y-3">
+                {scanResults.map((result, index) => (
+                  <div key={index} className="flex items-center justify-between py-2 px-3 bg-aegis-700/30 rounded-lg">
+                    <div className="flex items-center gap-3">
+                      {result.status === 'pass' && <CheckCircle2 className="w-4 h-4 text-secure-400" />}
+                      {result.status === 'warning' && <AlertTriangle className="w-4 h-4 text-threat-400" />}
+                      {result.status === 'fail' && <XCircle className="w-4 h-4 text-critical-400" />}
+                      <span className="text-sm text-white">{result.label}</span>
+                    </div>
+                    <span className={`text-xs font-mono ${
+                      result.status === 'pass' ? 'text-secure-400' :
+                      result.status === 'warning' ? 'text-threat-400' : 'text-critical-400'
+                    }`}>
+                      {result.detail}
+                    </span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Report Footer */}
+              <div className="p-4 border-t border-white/10 bg-aegis-700/30">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-gray-500">Sample Report Preview</span>
+                  <span className="text-xs text-shield-400">Full report on scan</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// AI-Ready Audit Section
+function AuditSection() {
+  const auditItems = [
+    "Outdated WordPress core, themes, and plugins",
+    "Vulnerable third-party integrations",
+    "Missing or misconfigured security plugins",
+    "Weak authentication and user permissions",
+    "Database exposure risks",
+    "File permission vulnerabilities"
+  ]
+
+  return (
+    <section id="audit" className="relative py-24 md:py-32 overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-aegis-800/50 via-aegis-900 to-aegis-800/50" />
+      <div className="absolute right-0 top-1/4 w-96 h-96 bg-secure-500/10 rounded-full blur-3xl" />
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          {/* Content */}
+          <div>
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-secure-500/10 border border-secure-500/20 rounded-full mb-6">
+              <Sparkles className="w-4 h-4 text-secure-400" />
+              <span className="text-sm font-medium text-secure-400">Deep Security Audit</span>
+            </div>
+            <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-6">
+              Is Your Website
+              <span className="text-gradient"> AI-Ready?</span>
+            </h2>
+            <p className="text-lg text-gray-400 mb-8">
+              Older websites — especially WordPress sites running outdated plugins — are
+              <span className="text-white font-medium"> sitting ducks</span> for AI-powered attacks.
+              Our comprehensive audit reveals exactly where you're vulnerable.
+            </p>
+
+            <div className="space-y-4 mb-8">
+              {auditItems.map((item, index) => (
+                <div key={index} className="flex items-center gap-3">
+                  <div className="w-5 h-5 rounded-full bg-secure-500/20 flex items-center justify-center flex-shrink-0">
+                    <CheckCircle2 className="w-3 h-3 text-secure-400" />
+                  </div>
+                  <span className="text-gray-300">{item}</span>
+                </div>
+              ))}
+            </div>
+
+            <a
+              href="#"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-secure-500 hover:bg-secure-400 text-white font-semibold rounded-xl transition-all shadow-lg shadow-secure-500/25"
+            >
+              Get Your Free Audit
+              <ArrowRight className="w-5 h-5" />
+            </a>
+          </div>
+
+          {/* Visual */}
+          <div className="relative">
+            <div className="absolute -inset-4 bg-gradient-to-r from-secure-500/10 to-shield-500/10 rounded-3xl blur-2xl" />
+            <div className="relative bg-aegis-800 border border-white/10 rounded-2xl p-8">
+              {/* WordPress vulnerability preview */}
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-12 h-12 bg-[#21759b]/20 rounded-xl flex items-center justify-center">
+                  <span className="text-2xl">W</span>
+                </div>
+                <div>
+                  <h4 className="font-display font-semibold text-white">WordPress Security Check</h4>
+                  <p className="text-sm text-gray-500">Last scan: Just now</p>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <div className="p-4 bg-critical-500/10 border border-critical-500/20 rounded-xl">
+                  <div className="flex items-start gap-3">
+                    <XCircle className="w-5 h-5 text-critical-400 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="font-medium text-critical-400">Critical: Outdated Plugin</p>
+                      <p className="text-sm text-gray-400 mt-1">
+                        Contact Form 7 v5.4 has known SQL injection vulnerability
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-4 bg-threat-500/10 border border-threat-500/20 rounded-xl">
+                  <div className="flex items-start gap-3">
+                    <AlertTriangle className="w-5 h-5 text-threat-400 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="font-medium text-threat-400">Warning: Weak Authentication</p>
+                      <p className="text-sm text-gray-400 mt-1">
+                        Default admin username detected, no 2FA enabled
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-4 bg-secure-500/10 border border-secure-500/20 rounded-xl">
+                  <div className="flex items-start gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-secure-400 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="font-medium text-secure-400">Passed: SSL Certificate</p>
+                      <p className="text-sm text-gray-400 mt-1">
+                        Valid certificate with proper configuration
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-6 pt-6 border-t border-white/10 flex items-center justify-between">
+                <span className="text-sm text-gray-500">12 more issues found</span>
+                <span className="text-sm text-shield-400 hover:text-shield-300 cursor-pointer">View full report →</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// Resources Section
+function Resources() {
+  const resources = [
+    {
+      type: "Guide",
+      title: "The Small Business Owner's Guide to Website Security",
+      description: "Everything you need to know about protecting your website, explained in plain English.",
+      icon: BookOpen,
+      color: "shield"
+    },
+    {
+      type: "Checklist",
+      title: "WordPress Security Hardening Checklist",
+      description: "20 essential steps to lock down your WordPress site, with step-by-step instructions.",
+      icon: CheckCircle2,
+      color: "secure"
+    },
+    {
+      type: "Ebook",
+      title: "AI Threats in 2025: What Every Business Must Know",
+      description: "How AI is changing cybersecurity and what you can do to stay protected.",
+      icon: FileText,
+      color: "threat"
+    }
+  ]
+
+  return (
+    <section id="resources" className="relative py-24 md:py-32 overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-aegis-900 to-aegis-800" />
+      <div className="absolute inset-0 bg-grid-pattern bg-grid opacity-20" />
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="max-w-3xl mx-auto text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-shield-500/10 border border-shield-500/20 rounded-full mb-6">
+            <BookOpen className="w-4 h-4 text-shield-400" />
+            <span className="text-sm font-medium text-shield-400">Free Resources</span>
+          </div>
+          <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-6">
+            Learn to Protect Your
+            <span className="text-gradient"> Digital Assets</span>
+          </h2>
+          <p className="text-lg text-gray-400">
+            Free guides, checklists, and ebooks to help you understand and improve your website security.
+          </p>
+        </div>
+
+        {/* Resources Grid */}
+        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+          {resources.map((resource, index) => (
+            <div
+              key={index}
+              className="group relative p-6 bg-aegis-800/50 backdrop-blur border border-white/5 rounded-2xl hover:border-white/10 transition-all duration-300 cursor-pointer"
+            >
+              <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium mb-4 ${
+                resource.color === 'shield' ? 'bg-shield-500/10 text-shield-400' :
+                resource.color === 'secure' ? 'bg-secure-500/10 text-secure-400' :
+                'bg-threat-500/10 text-threat-400'
+              }`}>
+                <resource.icon className="w-3 h-3" />
+                {resource.type}
+              </div>
+
+              <h3 className="font-display font-semibold text-lg mb-3 text-white group-hover:text-shield-400 transition-colors">
+                {resource.title}
+              </h3>
+              <p className="text-gray-400 text-sm mb-6">
+                {resource.description}
+              </p>
+
+              <div className="flex items-center gap-2 text-sm text-shield-400 group-hover:text-shield-300 transition-colors">
+                Download Free
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </div>
+
+              {/* Hover effect */}
+              <div className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none ${
+                resource.color === 'shield' ? 'bg-gradient-to-r from-shield-500/5 to-transparent' :
+                resource.color === 'secure' ? 'bg-gradient-to-r from-secure-500/5 to-transparent' :
+                'bg-gradient-to-r from-threat-500/5 to-transparent'
+              }`} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// Pricing Section
+function Pricing() {
+  const plans = [
+    {
+      name: "Free Scan",
+      description: "Perfect for a quick security check",
+      price: "0",
+      period: "one-time",
+      features: [
+        "Basic vulnerability scan",
+        "SSL certificate check",
+        "Security headers analysis",
+        "CMS detection",
+        "Email report",
+      ],
+      cta: "Scan Free",
+      featured: false
+    },
+    {
+      name: "Pro Monitoring",
+      description: "Continuous protection for your business",
+      price: "49",
+      period: "/month",
+      features: [
+        "Everything in Free, plus:",
+        "24/7 continuous monitoring",
+        "Real-time threat alerts",
+        "Malware scanning & removal",
+        "Firewall recommendations",
+        "Priority support",
+        "Monthly security reports",
+      ],
+      cta: "Start Pro Trial",
+      featured: true
+    },
+    {
+      name: "Enterprise",
+      description: "Full-service security for larger sites",
+      price: "Custom",
+      period: "",
+      features: [
+        "Everything in Pro, plus:",
+        "Dedicated security engineer",
+        "Custom security policies",
+        "Incident response team",
+        "Compliance assistance",
+        "Multi-site management",
+        "SLA guarantee",
+      ],
+      cta: "Contact Sales",
+      featured: false
+    }
+  ]
+
+  return (
+    <section id="pricing" className="relative py-24 md:py-32 overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-aegis-800 via-aegis-900 to-aegis-800" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-96 bg-shield-500/5 rounded-full blur-3xl" />
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="max-w-3xl mx-auto text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-secure-500/10 border border-secure-500/20 rounded-full mb-6">
+            <Award className="w-4 h-4 text-secure-400" />
+            <span className="text-sm font-medium text-secure-400">Protection Plans</span>
+          </div>
+          <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl mb-6">
+            Choose Your Level of
+            <span className="text-gradient"> Protection</span>
+          </h2>
+          <p className="text-lg text-gray-400">
+            Start with a free scan, then upgrade to continuous monitoring for complete peace of mind.
+          </p>
+        </div>
+
+        {/* Pricing Cards */}
+        <div className="grid md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
+          {plans.map((plan, index) => (
+            <div
+              key={index}
+              className={`relative p-6 lg:p-8 rounded-2xl transition-all duration-300 ${
+                plan.featured
+                  ? 'bg-gradient-to-b from-shield-500/10 to-aegis-800 border-2 border-shield-500/30 shadow-lg shadow-shield-500/10'
+                  : 'bg-aegis-800/50 border border-white/10 hover:border-white/20'
+              }`}
+            >
+              {plan.featured && (
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-shield-500 text-white text-xs font-semibold rounded-full">
+                  Most Popular
+                </div>
+              )}
+
+              <div className="mb-6">
+                <h3 className="font-display font-bold text-xl text-white mb-2">{plan.name}</h3>
+                <p className="text-sm text-gray-400">{plan.description}</p>
+              </div>
+
+              <div className="mb-6">
+                <div className="flex items-baseline gap-1">
+                  {plan.price !== "Custom" && <span className="text-gray-400">$</span>}
+                  <span className="font-display font-bold text-4xl text-white">{plan.price}</span>
+                  <span className="text-gray-400">{plan.period}</span>
+                </div>
+              </div>
+
+              <ul className="space-y-3 mb-8">
+                {plan.features.map((feature, fIndex) => (
+                  <li key={fIndex} className="flex items-start gap-3">
+                    <CheckCircle2 className={`w-4 h-4 mt-1 flex-shrink-0 ${plan.featured ? 'text-shield-400' : 'text-secure-400'}`} />
+                    <span className="text-sm text-gray-300">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <button className={`w-full py-3 px-6 rounded-xl font-semibold text-sm transition-all ${
+                plan.featured
+                  ? 'bg-shield-500 hover:bg-shield-400 text-white shadow-lg shadow-shield-500/25'
+                  : 'bg-aegis-700 hover:bg-aegis-600 text-white border border-white/10'
+              }`}>
+                {plan.cta}
+              </button>
+            </div>
+          ))}
+        </div>
+
+        {/* Money-back guarantee */}
+        <div className="mt-12 text-center">
+          <div className="inline-flex items-center gap-2 text-gray-400">
+            <ShieldCheck className="w-5 h-5 text-secure-400" />
+            <span className="text-sm">30-day money-back guarantee on all paid plans</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// Footer
+function Footer() {
+  return (
+    <footer className="relative py-16 border-t border-white/5">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid md:grid-cols-4 gap-12 mb-12">
+          {/* Brand */}
+          <div className="md:col-span-2">
+            <a href="#" className="flex items-center gap-3 mb-4">
+              <Shield className="w-8 h-8 text-shield-400" />
+              <span className="font-display font-bold text-xl">
+                Aegis<span className="text-shield-400">Security</span>
+              </span>
+            </a>
+            <p className="text-gray-400 max-w-sm mb-6">
+              Protecting small businesses from AI-powered cyber threats.
+              Free security scanning and professional monitoring solutions.
+            </p>
+            <div className="flex items-center gap-6">
+              <div className="flex items-center gap-2 text-sm text-gray-400">
+                <Lock className="w-4 h-4 text-secure-400" />
+                <span>SOC 2 Compliant</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm text-gray-400">
+                <ShieldCheck className="w-4 h-4 text-secure-400" />
+                <span>GDPR Ready</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <h4 className="font-display font-semibold text-white mb-4">Product</h4>
+            <ul className="space-y-3">
+              <li><a href="#scanner" className="text-gray-400 hover:text-white transition-colors text-sm">Free Scanner</a></li>
+              <li><a href="#audit" className="text-gray-400 hover:text-white transition-colors text-sm">Security Audit</a></li>
+              <li><a href="#pricing" className="text-gray-400 hover:text-white transition-colors text-sm">Pro Monitoring</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Enterprise</a></li>
+            </ul>
+          </div>
+
+          {/* Resources */}
+          <div>
+            <h4 className="font-display font-semibold text-white mb-4">Resources</h4>
+            <ul className="space-y-3">
+              <li><a href="#resources" className="text-gray-400 hover:text-white transition-colors text-sm">Security Guides</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Blog</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">FAQ</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Contact Support</a></li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Bottom */}
+        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-sm text-gray-500">
+            &copy; {new Date().getFullYear()} Aegis Security. All rights reserved.
+          </p>
+          <div className="flex items-center gap-6">
+            <a href="#" className="text-sm text-gray-500 hover:text-white transition-colors">Privacy Policy</a>
+            <a href="#" className="text-sm text-gray-500 hover:text-white transition-colors">Terms of Service</a>
+            <a href="#" className="text-sm text-gray-500 hover:text-white transition-colors">Cookie Policy</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  )
+}
+
+// Main App Component
+export default function App() {
+  return (
+    <div className="relative min-h-screen noise-overlay">
+      <Navigation />
+      <main>
+        <Hero />
+        <Problem />
+        <Scanner />
+        <AuditSection />
+        <Resources />
+        <Pricing />
+      </main>
+      <Footer />
+    </div>
+  )
+}
