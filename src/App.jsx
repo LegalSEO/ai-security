@@ -1,4 +1,5 @@
-import { useState, useRef } from 'react'
+import { useState, useEffect } from 'react'
+import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom'
 import {
   Shield,
   Bot,
@@ -16,6 +17,7 @@ import {
   Menu,
   X,
   ChevronRight,
+  ChevronDown,
   Globe,
   Server,
   Code,
@@ -30,16 +32,38 @@ import {
 } from 'lucide-react'
 import { Scanner } from './components/Scanner'
 
+// Page imports
+import ThreatsPage from './pages/ThreatsPage'
+import WordPressSecurityPage from './pages/WordPressSecurityPage'
+import ResourcesPage from './pages/ResourcesPage'
+import AboutPage from './pages/AboutPage'
+import PricingPage from './pages/PricingPage'
+
+// Scroll to top on route change
+function ScrollToTop() {
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+
+  return null
+}
+
 // Navigation Component
 function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
+  const [learnOpen, setLearnOpen] = useState(false)
+  const location = useLocation()
+
+  const isActive = (path) => location.pathname === path
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-aegis-900/80 backdrop-blur-xl border-b border-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-3 group">
+          <Link to="/" className="flex items-center gap-3 group">
             <div className="relative">
               <Shield className="w-8 h-8 text-shield-400 transition-transform group-hover:scale-110" />
               <div className="absolute inset-0 bg-shield-400/20 blur-xl rounded-full" />
@@ -47,26 +71,89 @@ function Navigation() {
             <span className="font-display font-bold text-xl tracking-tight">
               Aegis<span className="text-shield-400">Security</span>
             </span>
-          </a>
+          </Link>
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-8">
-            <a href="#problem" className="text-sm text-gray-400 hover:text-white transition-colors">The Threat</a>
-            <a href="#scanner" className="text-sm text-gray-400 hover:text-white transition-colors">Free Scanner</a>
-            <a href="#audit" className="text-sm text-gray-400 hover:text-white transition-colors">Security Audit</a>
-            <a href="#resources" className="text-sm text-gray-400 hover:text-white transition-colors">Resources</a>
-            <a href="#pricing" className="text-sm text-gray-400 hover:text-white transition-colors">Pricing</a>
+            {/* Learn Dropdown */}
+            <div className="relative group">
+              <button
+                className="flex items-center gap-1 text-sm text-gray-400 hover:text-white transition-colors"
+                onMouseEnter={() => setLearnOpen(true)}
+                onMouseLeave={() => setLearnOpen(false)}
+              >
+                Learn
+                <ChevronDown className="w-4 h-4" />
+              </button>
+              <div
+                className={`absolute top-full left-0 pt-2 ${learnOpen ? 'block' : 'hidden'}`}
+                onMouseEnter={() => setLearnOpen(true)}
+                onMouseLeave={() => setLearnOpen(false)}
+              >
+                <div className="bg-aegis-800 border border-white/10 rounded-xl shadow-xl p-2 min-w-[220px]">
+                  <Link
+                    to="/threats"
+                    className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-aegis-700/50 transition-colors"
+                  >
+                    <AlertTriangle className="w-5 h-5 text-critical-400" />
+                    <div>
+                      <div className="text-sm font-medium text-white">AI Threats</div>
+                      <div className="text-xs text-gray-500">Learn about modern attacks</div>
+                    </div>
+                  </Link>
+                  <Link
+                    to="/wordpress-security"
+                    className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-aegis-700/50 transition-colors"
+                  >
+                    <Code className="w-5 h-5 text-threat-400" />
+                    <div>
+                      <div className="text-sm font-medium text-white">WordPress Security</div>
+                      <div className="text-xs text-gray-500">Protect your WP site</div>
+                    </div>
+                  </Link>
+                  <Link
+                    to="/resources"
+                    className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-aegis-700/50 transition-colors"
+                  >
+                    <BookOpen className="w-5 h-5 text-shield-400" />
+                    <div>
+                      <div className="text-sm font-medium text-white">Resources</div>
+                      <div className="text-xs text-gray-500">Guides & downloads</div>
+                    </div>
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            <Link
+              to="/#scanner"
+              className={`text-sm transition-colors ${isActive('/') ? 'text-shield-400' : 'text-gray-400 hover:text-white'}`}
+            >
+              Free Scanner
+            </Link>
+            <Link
+              to="/pricing"
+              className={`text-sm transition-colors ${isActive('/pricing') ? 'text-shield-400' : 'text-gray-400 hover:text-white'}`}
+            >
+              Pricing
+            </Link>
+            <Link
+              to="/about"
+              className={`text-sm transition-colors ${isActive('/about') ? 'text-shield-400' : 'text-gray-400 hover:text-white'}`}
+            >
+              About
+            </Link>
           </div>
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <a
-              href="#scanner"
+            <Link
+              to="/#scanner"
               className="inline-flex items-center gap-2 px-5 py-2.5 bg-shield-500 hover:bg-shield-400 text-white font-semibold text-sm rounded-lg transition-all hover:shadow-lg hover:shadow-shield-500/25"
             >
               Scan Free
               <ArrowRight className="w-4 h-4" />
-            </a>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -81,20 +168,59 @@ function Navigation() {
         {/* Mobile Menu */}
         {isOpen && (
           <div className="md:hidden py-4 border-t border-white/5">
-            <div className="flex flex-col gap-4">
-              <a href="#problem" className="text-gray-400 hover:text-white transition-colors" onClick={() => setIsOpen(false)}>The Threat</a>
-              <a href="#scanner" className="text-gray-400 hover:text-white transition-colors" onClick={() => setIsOpen(false)}>Free Scanner</a>
-              <a href="#audit" className="text-gray-400 hover:text-white transition-colors" onClick={() => setIsOpen(false)}>Security Audit</a>
-              <a href="#resources" className="text-gray-400 hover:text-white transition-colors" onClick={() => setIsOpen(false)}>Resources</a>
-              <a href="#pricing" className="text-gray-400 hover:text-white transition-colors" onClick={() => setIsOpen(false)}>Pricing</a>
-              <a
-                href="#scanner"
-                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-shield-500 text-white font-semibold text-sm rounded-lg"
+            <div className="flex flex-col gap-1">
+              <Link
+                to="/threats"
+                className="px-4 py-3 text-gray-400 hover:text-white hover:bg-aegis-800/50 rounded-lg transition-colors"
                 onClick={() => setIsOpen(false)}
               >
-                Scan Free
-                <ArrowRight className="w-4 h-4" />
-              </a>
+                AI Threats
+              </Link>
+              <Link
+                to="/wordpress-security"
+                className="px-4 py-3 text-gray-400 hover:text-white hover:bg-aegis-800/50 rounded-lg transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                WordPress Security
+              </Link>
+              <Link
+                to="/resources"
+                className="px-4 py-3 text-gray-400 hover:text-white hover:bg-aegis-800/50 rounded-lg transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                Resources
+              </Link>
+              <Link
+                to="/#scanner"
+                className="px-4 py-3 text-gray-400 hover:text-white hover:bg-aegis-800/50 rounded-lg transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                Free Scanner
+              </Link>
+              <Link
+                to="/pricing"
+                className="px-4 py-3 text-gray-400 hover:text-white hover:bg-aegis-800/50 rounded-lg transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                Pricing
+              </Link>
+              <Link
+                to="/about"
+                className="px-4 py-3 text-gray-400 hover:text-white hover:bg-aegis-800/50 rounded-lg transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                About
+              </Link>
+              <div className="px-4 pt-4">
+                <Link
+                  to="/#scanner"
+                  className="flex items-center justify-center gap-2 px-5 py-2.5 bg-shield-500 text-white font-semibold text-sm rounded-lg"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Scan Free
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
             </div>
           </div>
         )}
@@ -154,10 +280,13 @@ function Hero() {
                     className="flex-1 bg-transparent text-white placeholder-gray-500 outline-none text-base"
                   />
                 </div>
-                <button className="flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-shield-500 to-shield-600 hover:from-shield-400 hover:to-shield-500 text-white font-semibold rounded-lg transition-all shadow-lg shadow-shield-500/25 hover:shadow-shield-500/40">
+                <a
+                  href="#scanner"
+                  className="flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-shield-500 to-shield-600 hover:from-shield-400 hover:to-shield-500 text-white font-semibold rounded-lg transition-all shadow-lg shadow-shield-500/25 hover:shadow-shield-500/40"
+                >
                   <Search className="w-5 h-5" />
                   <span>Scan Free</span>
-                </button>
+                </a>
               </div>
             </div>
             <p className="mt-4 text-sm text-gray-500">
@@ -405,13 +534,13 @@ function AuditSection() {
               ))}
             </div>
 
-            <a
-              href="#"
+            <Link
+              to="/wordpress-security"
               className="inline-flex items-center gap-2 px-6 py-3 bg-secure-500 hover:bg-secure-400 text-white font-semibold rounded-xl transition-all shadow-lg shadow-secure-500/25"
             >
-              Get Your Free Audit
+              Learn More About WordPress Security
               <ArrowRight className="w-5 h-5" />
-            </a>
+            </Link>
           </div>
 
           {/* Visual */}
@@ -530,8 +659,9 @@ function Resources() {
         {/* Resources Grid */}
         <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
           {resources.map((resource, index) => (
-            <div
+            <Link
               key={index}
+              to="/resources"
               className="group relative p-6 bg-aegis-800/50 backdrop-blur border border-white/5 rounded-2xl hover:border-white/10 transition-all duration-300 cursor-pointer"
             >
               <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium mb-4 ${
@@ -561,8 +691,19 @@ function Resources() {
                 resource.color === 'secure' ? 'bg-gradient-to-r from-secure-500/5 to-transparent' :
                 'bg-gradient-to-r from-threat-500/5 to-transparent'
               }`} />
-            </div>
+            </Link>
           ))}
+        </div>
+
+        {/* View All Link */}
+        <div className="mt-12 text-center">
+          <Link
+            to="/resources"
+            className="inline-flex items-center gap-2 text-shield-400 hover:text-shield-300 font-medium transition-colors"
+          >
+            View All Resources
+            <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
       </div>
     </section>
@@ -585,6 +726,7 @@ function Pricing() {
         "Email report",
       ],
       cta: "Scan Free",
+      ctaLink: "#scanner",
       featured: false
     },
     {
@@ -602,6 +744,7 @@ function Pricing() {
         "Monthly security reports",
       ],
       cta: "Start Pro Trial",
+      ctaLink: "/pricing",
       featured: true
     },
     {
@@ -619,6 +762,7 @@ function Pricing() {
         "SLA guarantee",
       ],
       cta: "Contact Sales",
+      ctaLink: "/about",
       featured: false
     }
   ]
@@ -684,19 +828,46 @@ function Pricing() {
                 ))}
               </ul>
 
-              <button className={`w-full py-3 px-6 rounded-xl font-semibold text-sm transition-all ${
-                plan.featured
-                  ? 'bg-shield-500 hover:bg-shield-400 text-white shadow-lg shadow-shield-500/25'
-                  : 'bg-aegis-700 hover:bg-aegis-600 text-white border border-white/10'
-              }`}>
-                {plan.cta}
-              </button>
+              {plan.ctaLink.startsWith('#') ? (
+                <a
+                  href={plan.ctaLink}
+                  className={`block w-full py-3 px-6 rounded-xl font-semibold text-sm text-center transition-all ${
+                    plan.featured
+                      ? 'bg-shield-500 hover:bg-shield-400 text-white shadow-lg shadow-shield-500/25'
+                      : 'bg-aegis-700 hover:bg-aegis-600 text-white border border-white/10'
+                  }`}
+                >
+                  {plan.cta}
+                </a>
+              ) : (
+                <Link
+                  to={plan.ctaLink}
+                  className={`block w-full py-3 px-6 rounded-xl font-semibold text-sm text-center transition-all ${
+                    plan.featured
+                      ? 'bg-shield-500 hover:bg-shield-400 text-white shadow-lg shadow-shield-500/25'
+                      : 'bg-aegis-700 hover:bg-aegis-600 text-white border border-white/10'
+                  }`}
+                >
+                  {plan.cta}
+                </Link>
+              )}
             </div>
           ))}
         </div>
 
-        {/* Money-back guarantee */}
+        {/* View Full Pricing */}
         <div className="mt-12 text-center">
+          <Link
+            to="/pricing"
+            className="inline-flex items-center gap-2 text-shield-400 hover:text-shield-300 font-medium transition-colors"
+          >
+            View Full Pricing Details
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+
+        {/* Money-back guarantee */}
+        <div className="mt-8 text-center">
           <div className="inline-flex items-center gap-2 text-gray-400">
             <ShieldCheck className="w-5 h-5 text-secure-400" />
             <span className="text-sm">30-day money-back guarantee on all paid plans</span>
@@ -715,12 +886,12 @@ function Footer() {
         <div className="grid md:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
           <div className="md:col-span-2">
-            <a href="#" className="flex items-center gap-3 mb-4">
+            <Link to="/" className="flex items-center gap-3 mb-4">
               <Shield className="w-8 h-8 text-shield-400" />
               <span className="font-display font-bold text-xl">
                 Aegis<span className="text-shield-400">Security</span>
               </span>
-            </a>
+            </Link>
             <p className="text-gray-400 max-w-sm mb-6">
               Protecting small businesses from AI-powered cyber threats.
               Free security scanning and professional monitoring solutions.
@@ -741,10 +912,10 @@ function Footer() {
           <div>
             <h4 className="font-display font-semibold text-white mb-4">Product</h4>
             <ul className="space-y-3">
-              <li><a href="#scanner" className="text-gray-400 hover:text-white transition-colors text-sm">Free Scanner</a></li>
-              <li><a href="#audit" className="text-gray-400 hover:text-white transition-colors text-sm">Security Audit</a></li>
-              <li><a href="#pricing" className="text-gray-400 hover:text-white transition-colors text-sm">Pro Monitoring</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Enterprise</a></li>
+              <li><Link to="/#scanner" className="text-gray-400 hover:text-white transition-colors text-sm">Free Scanner</Link></li>
+              <li><Link to="/pricing" className="text-gray-400 hover:text-white transition-colors text-sm">Pro Monitoring</Link></li>
+              <li><Link to="/pricing" className="text-gray-400 hover:text-white transition-colors text-sm">Enterprise</Link></li>
+              <li><Link to="/about" className="text-gray-400 hover:text-white transition-colors text-sm">About Us</Link></li>
             </ul>
           </div>
 
@@ -752,10 +923,10 @@ function Footer() {
           <div>
             <h4 className="font-display font-semibold text-white mb-4">Resources</h4>
             <ul className="space-y-3">
-              <li><a href="#resources" className="text-gray-400 hover:text-white transition-colors text-sm">Security Guides</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Blog</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">FAQ</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm">Contact Support</a></li>
+              <li><Link to="/threats" className="text-gray-400 hover:text-white transition-colors text-sm">AI Threats</Link></li>
+              <li><Link to="/wordpress-security" className="text-gray-400 hover:text-white transition-colors text-sm">WordPress Security</Link></li>
+              <li><Link to="/resources" className="text-gray-400 hover:text-white transition-colors text-sm">Guides & Downloads</Link></li>
+              <li><Link to="/pricing" className="text-gray-400 hover:text-white transition-colors text-sm">Pricing</Link></li>
             </ul>
           </div>
         </div>
@@ -766,9 +937,9 @@ function Footer() {
             &copy; {new Date().getFullYear()} Aegis Security. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <a href="#" className="text-sm text-gray-500 hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="text-sm text-gray-500 hover:text-white transition-colors">Terms of Service</a>
-            <a href="#" className="text-sm text-gray-500 hover:text-white transition-colors">Cookie Policy</a>
+            <Link to="/about" className="text-sm text-gray-500 hover:text-white transition-colors">Privacy Policy</Link>
+            <Link to="/about" className="text-sm text-gray-500 hover:text-white transition-colors">Terms of Service</Link>
+            <Link to="/about" className="text-sm text-gray-500 hover:text-white transition-colors">Cookie Policy</Link>
           </div>
         </div>
       </div>
@@ -776,20 +947,46 @@ function Footer() {
   )
 }
 
-// Main App Component
-export default function App() {
+// Home Page Component
+function HomePage() {
+  return (
+    <>
+      <Hero />
+      <Problem />
+      <ScannerSection />
+      <AuditSection />
+      <Resources />
+      <Pricing />
+    </>
+  )
+}
+
+// Layout wrapper
+function Layout({ children }) {
   return (
     <div className="relative min-h-screen noise-overlay">
       <Navigation />
-      <main>
-        <Hero />
-        <Problem />
-        <ScannerSection />
-        <AuditSection />
-        <Resources />
-        <Pricing />
-      </main>
+      <main>{children}</main>
       <Footer />
     </div>
+  )
+}
+
+// Main App Component
+export default function App() {
+  return (
+    <BrowserRouter>
+      <ScrollToTop />
+      <Layout>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/threats" element={<ThreatsPage />} />
+          <Route path="/wordpress-security" element={<WordPressSecurityPage />} />
+          <Route path="/resources" element={<ResourcesPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/pricing" element={<PricingPage />} />
+        </Routes>
+      </Layout>
+    </BrowserRouter>
   )
 }
