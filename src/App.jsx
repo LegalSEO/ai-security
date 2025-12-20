@@ -32,6 +32,7 @@ import {
 } from 'lucide-react'
 import { Scanner } from './components/Scanner'
 import { ExitIntentPopup, InlineEmailCapture } from './components/EmailCapture'
+import { AuthProvider, AdminRoute, UserRoute, AdminLoginPage, UserLoginPage, UserHeader, useAuth } from './components/Auth'
 
 // Page imports
 import ThreatsPage from './pages/ThreatsPage'
@@ -41,6 +42,7 @@ import AboutPage from './pages/AboutPage'
 import PricingPage from './pages/PricingPage'
 import AdminDashboard from './pages/AdminDashboard'
 import ArtOfCyberWarPage from './pages/ArtOfCyberWarPage'
+import UserDashboard from './pages/UserDashboard'
 
 // Scroll to top on route change
 function ScrollToTop() {
@@ -1029,19 +1031,37 @@ function Layout({ children }) {
 export default function App() {
   return (
     <BrowserRouter>
-      <ScrollToTop />
-      <Layout>
+      <AuthProvider>
+        <ScrollToTop />
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/threats" element={<ThreatsPage />} />
-          <Route path="/wordpress-security" element={<WordPressSecurityPage />} />
-          <Route path="/resources" element={<ResourcesPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/pricing" element={<PricingPage />} />
-          <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/art-of-cyber-war" element={<ArtOfCyberWarPage />} />
+          {/* Public routes with layout */}
+          <Route path="/" element={<Layout><HomePage /></Layout>} />
+          <Route path="/threats" element={<Layout><ThreatsPage /></Layout>} />
+          <Route path="/wordpress-security" element={<Layout><WordPressSecurityPage /></Layout>} />
+          <Route path="/resources" element={<Layout><ResourcesPage /></Layout>} />
+          <Route path="/about" element={<Layout><AboutPage /></Layout>} />
+          <Route path="/pricing" element={<Layout><PricingPage /></Layout>} />
+          <Route path="/art-of-cyber-war" element={<Layout><ArtOfCyberWarPage /></Layout>} />
+
+          {/* Auth routes (no layout) */}
+          <Route path="/login" element={<UserLoginPage />} />
+          <Route path="/admin/login" element={<AdminLoginPage />} />
+
+          {/* Protected admin routes */}
+          <Route path="/admin" element={
+            <AdminRoute>
+              <Layout><AdminDashboard /></Layout>
+            </AdminRoute>
+          } />
+
+          {/* Protected user routes */}
+          <Route path="/dashboard" element={
+            <UserRoute>
+              <Layout><UserDashboard /></Layout>
+            </UserRoute>
+          } />
         </Routes>
-      </Layout>
+      </AuthProvider>
     </BrowserRouter>
   )
 }
