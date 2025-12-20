@@ -28,6 +28,7 @@ import {
 import { useScanner } from '../hooks/useScanner'
 import { CheckStatus, CategoryConfig, getGradeColor } from '../services/scannerTypes'
 import { downloadReport } from '../services/reportGenerator'
+import { ScanResultsEmailBanner } from './EmailCapture'
 
 // Icon mapping for categories
 const CategoryIcons = {
@@ -245,9 +246,23 @@ function ScanResults({ results, onNewScan }) {
   const { hostname, score, grade, summary, categories, endTime, startTime } = results
   const scanDuration = Math.round((endTime - startTime) / 1000)
   const gradeColorClass = getGradeColorClass(grade)
+  const [emailCaptured, setEmailCaptured] = useState(false)
+
+  const handleEmailCapture = (email, lead) => {
+    setEmailCaptured(true)
+    console.log('Lead captured:', email, lead)
+  }
 
   return (
     <div className="w-full max-w-4xl mx-auto space-y-6">
+      {/* Email Capture Banner */}
+      {!emailCaptured && (
+        <ScanResultsEmailBanner
+          scanResults={results}
+          onCapture={handleEmailCapture}
+        />
+      )}
+
       {/* Score Card */}
       <div className="bg-aegis-800 border border-white/10 rounded-2xl overflow-hidden">
         <div className="p-6 md:p-8">

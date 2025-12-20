@@ -31,6 +31,7 @@ import {
   Sparkles
 } from 'lucide-react'
 import { Scanner } from './components/Scanner'
+import { ExitIntentPopup, InlineEmailCapture } from './components/EmailCapture'
 
 // Page imports
 import ThreatsPage from './pages/ThreatsPage'
@@ -38,6 +39,7 @@ import WordPressSecurityPage from './pages/WordPressSecurityPage'
 import ResourcesPage from './pages/ResourcesPage'
 import AboutPage from './pages/AboutPage'
 import PricingPage from './pages/PricingPage'
+import AdminDashboard from './pages/AdminDashboard'
 
 // Scroll to top on route change
 function ScrollToTop() {
@@ -883,6 +885,26 @@ function Footer() {
   return (
     <footer className="relative py-16 border-t border-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Newsletter Section */}
+        <div className="bg-aegis-800/50 border border-white/5 rounded-2xl p-6 md:p-8 mb-12">
+          <div className="flex flex-col md:flex-row items-center gap-6">
+            <div className="flex-1 text-center md:text-left">
+              <h3 className="font-display font-bold text-lg text-white mb-2">
+                Get Weekly Security Tips
+              </h3>
+              <p className="text-gray-400 text-sm">
+                Join 2,000+ business owners getting actionable security advice every week.
+              </p>
+            </div>
+            <div className="w-full md:w-auto md:min-w-[360px]">
+              <InlineEmailCapture
+                placeholder="your@email.com"
+                buttonText="Subscribe"
+              />
+            </div>
+          </div>
+        </div>
+
         <div className="grid md:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
           <div className="md:col-span-2">
@@ -939,7 +961,7 @@ function Footer() {
           <div className="flex items-center gap-6">
             <Link to="/about" className="text-sm text-gray-500 hover:text-white transition-colors">Privacy Policy</Link>
             <Link to="/about" className="text-sm text-gray-500 hover:text-white transition-colors">Terms of Service</Link>
-            <Link to="/about" className="text-sm text-gray-500 hover:text-white transition-colors">Cookie Policy</Link>
+            <Link to="/admin" className="text-sm text-gray-500 hover:text-white transition-colors">Admin</Link>
           </div>
         </div>
       </div>
@@ -968,6 +990,7 @@ function Layout({ children }) {
       <Navigation />
       <main>{children}</main>
       <Footer />
+      <ExitIntentPopup />
     </div>
   )
 }
@@ -985,6 +1008,7 @@ export default function App() {
           <Route path="/resources" element={<ResourcesPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/pricing" element={<PricingPage />} />
+          <Route path="/admin" element={<AdminDashboard />} />
         </Routes>
       </Layout>
     </BrowserRouter>
