@@ -40,6 +40,7 @@ import ResourcesPage from './pages/ResourcesPage'
 import AboutPage from './pages/AboutPage'
 import PricingPage from './pages/PricingPage'
 import AdminDashboard from './pages/AdminDashboard'
+import ArtOfCyberWarPage from './pages/ArtOfCyberWarPage'
 
 // Scroll to top on route change
 function ScrollToTop() {
@@ -71,7 +72,7 @@ function Navigation() {
               <div className="absolute inset-0 bg-shield-400/20 blur-xl rounded-full" />
             </div>
             <span className="font-display font-bold text-xl tracking-tight">
-              Aegis<span className="text-shield-400">Security</span>
+              Tzu<span className="text-shield-400">Shield</span>
             </span>
           </Link>
 
@@ -121,6 +122,16 @@ function Navigation() {
                     <div>
                       <div className="text-sm font-medium text-white">Resources</div>
                       <div className="text-xs text-gray-500">Guides & downloads</div>
+                    </div>
+                  </Link>
+                  <Link
+                    to="/art-of-cyber-war"
+                    className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-aegis-700/50 transition-colors"
+                  >
+                    <Shield className="w-5 h-5 text-secure-400" />
+                    <div>
+                      <div className="text-sm font-medium text-white">Art of Cyber War</div>
+                      <div className="text-xs text-gray-500">Sun Tzu's wisdom applied</div>
                     </div>
                   </Link>
                 </div>
@@ -191,6 +202,13 @@ function Navigation() {
                 onClick={() => setIsOpen(false)}
               >
                 Resources
+              </Link>
+              <Link
+                to="/art-of-cyber-war"
+                className="px-4 py-3 text-gray-400 hover:text-white hover:bg-aegis-800/50 rounded-lg transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                Art of Cyber War
               </Link>
               <Link
                 to="/#scanner"
@@ -311,6 +329,14 @@ function Hero() {
               <span className="text-sm">100% private & secure</span>
             </div>
           </div>
+
+          {/* Sun Tzu Quote */}
+          <div className="mt-12 animate-slide-up delay-400">
+            <p className="text-sm italic text-gray-500">
+              "If you know the enemy and know yourself, you need not fear the result of a hundred battles."
+              <span className="text-gray-600"> — Sun Tzu</span>
+            </p>
+          </div>
         </div>
       </div>
 
@@ -374,6 +400,10 @@ function Problem() {
             Hackers aren't manually typing commands anymore. They're deploying AI armies that
             probe millions of websites simultaneously. Your site is being scanned right now —
             <span className="text-white font-medium"> the question is whether you're ready.</span>
+          </p>
+          <p className="mt-4 text-sm italic text-gray-500">
+            "The art of war teaches us to rely not on the likelihood of the enemy's not coming,
+            but on our own readiness to receive him." — Sun Tzu
           </p>
         </div>
 
@@ -911,12 +941,12 @@ function Footer() {
             <Link to="/" className="flex items-center gap-3 mb-4">
               <Shield className="w-8 h-8 text-shield-400" />
               <span className="font-display font-bold text-xl">
-                Aegis<span className="text-shield-400">Security</span>
+                Tzu<span className="text-shield-400">Shield</span>
               </span>
             </Link>
             <p className="text-gray-400 max-w-sm mb-6">
-              Protecting small businesses from AI-powered cyber threats.
-              Free security scanning and professional monitoring solutions.
+              "The supreme art of war is to subdue the enemy without fighting."
+              — Ancient wisdom for modern cyber defense.
             </p>
             <div className="flex items-center gap-6">
               <div className="flex items-center gap-2 text-sm text-gray-400">
@@ -948,7 +978,7 @@ function Footer() {
               <li><Link to="/threats" className="text-gray-400 hover:text-white transition-colors text-sm">AI Threats</Link></li>
               <li><Link to="/wordpress-security" className="text-gray-400 hover:text-white transition-colors text-sm">WordPress Security</Link></li>
               <li><Link to="/resources" className="text-gray-400 hover:text-white transition-colors text-sm">Guides & Downloads</Link></li>
-              <li><Link to="/pricing" className="text-gray-400 hover:text-white transition-colors text-sm">Pricing</Link></li>
+              <li><Link to="/art-of-cyber-war" className="text-gray-400 hover:text-white transition-colors text-sm">Art of Cyber War</Link></li>
             </ul>
           </div>
         </div>
@@ -956,7 +986,7 @@ function Footer() {
         {/* Bottom */}
         <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-gray-500">
-            &copy; {new Date().getFullYear()} Aegis Security. All rights reserved.
+            &copy; {new Date().getFullYear()} Tzu Shield. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
             <Link to="/about" className="text-sm text-gray-500 hover:text-white transition-colors">Privacy Policy</Link>
@@ -1009,6 +1039,7 @@ export default function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/pricing" element={<PricingPage />} />
           <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/art-of-cyber-war" element={<ArtOfCyberWarPage />} />
         </Routes>
       </Layout>
     </BrowserRouter>

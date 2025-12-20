@@ -135,7 +135,7 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen">
       <PageHeader
-        badge="About Aegis"
+        badge="About Tzu Shield"
         title="Security Made Accessible"
         subtitle="We believe every business deserves enterprise-grade security insights, regardless of size or technical expertise."
       />
@@ -151,10 +151,10 @@ export default function AboutPage() {
               The cybersecurity industry has a problem: it's built for enterprises with dedicated IT teams and six-figure budgets. Small businesses and solopreneurs are left to fend for themselves, often unaware of the risks they face until it's too late.
             </p>
             <p className="text-gray-400 text-lg mb-6">
-              <span className="text-white font-semibold">Aegis Security exists to change that.</span> We're building tools and resources that give every business owner visibility into their security posture — the same visibility that Fortune 500 companies have, but designed for people who aren't security experts.
+              <span className="text-white font-semibold">Tzu Shield exists to change that.</span> We're building tools and resources that give every business owner visibility into their security posture — the same visibility that Fortune 500 companies have, but designed for people who aren't security experts.
             </p>
             <p className="text-gray-400 text-lg">
-              We started Aegis because we saw too many small businesses get hurt by preventable attacks. Businesses that didn't know their WordPress was vulnerable, that their contact form was exposed, or that their SSL certificate had expired. We're here to make sure that doesn't happen to you.
+              We started Tzu Shield because we saw too many small businesses get hurt by preventable attacks. Businesses that didn't know their WordPress was vulnerable, that their contact form was exposed, or that their SSL certificate had expired. We're here to make sure that doesn't happen to you.
             </p>
           </div>
         </div>
@@ -244,7 +244,7 @@ export default function AboutPage() {
             <div className="bg-aegis-800/50 border border-secure-500/20 rounded-2xl p-6">
               <h3 className="font-semibold text-secure-400 mb-4 flex items-center gap-2">
                 <Shield className="w-5 h-5" />
-                Aegis Security
+                Tzu Shield
               </h3>
               <ul className="space-y-3 text-gray-400 text-sm">
                 <li className="flex items-start gap-2">
@@ -282,7 +282,7 @@ export default function AboutPage() {
           </h2>
           <p className="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">
             Our team has experience in enterprise security, penetration testing, and helping businesses
-            recover from breaches. We've seen what goes wrong — and we've built Aegis to prevent it.
+            recover from breaches. We've seen what goes wrong — and we've built Tzu Shield to prevent it.
           </p>
           <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-500">
             <span className="px-4 py-2 bg-aegis-700/50 rounded-full">10+ Years Security Experience</span>

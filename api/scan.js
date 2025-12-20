@@ -493,7 +493,7 @@ async function fetchPage(url) {
       method: 'GET',
       timeout: 15000,
       headers: {
-        'User-Agent': 'Mozilla/5.0 (compatible; AegisSecurity/1.0; +https://aegissecurity.com)'
+        'User-Agent': 'Mozilla/5.0 (compatible; TzuShield/1.0; +https://tzushield.com)'
       }
     };
 

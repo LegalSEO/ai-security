@@ -5,9 +5,9 @@
  */
 
 const STORAGE_KEYS = {
-  LEADS: 'aegis_leads',
-  EMAIL_SEQUENCES: 'aegis_email_sequences',
-  SETTINGS: 'aegis_lead_settings'
+  LEADS: 'tzu_leads',
+  EMAIL_SEQUENCES: 'tzu_email_sequences',
+  SETTINGS: 'tzu_lead_settings'
 }
 
 // Lead status types
