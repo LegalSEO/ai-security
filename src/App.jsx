@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import {
   Shield,
   Bot,
@@ -28,6 +28,7 @@ import {
   Award,
   Sparkles
 } from 'lucide-react'
+import { Scanner } from './components/Scanner'
 
 // Navigation Component
 function Navigation() {
@@ -290,37 +291,28 @@ function Problem() {
   )
 }
 
-// Scanner Section
-function Scanner() {
-  const scanResults = [
-    { label: "SSL Certificate", status: "pass", detail: "Valid until Dec 2025" },
-    { label: "Security Headers", status: "warning", detail: "3 headers missing" },
-    { label: "WordPress Version", status: "fail", detail: "Outdated (6.1.2)" },
-    { label: "Plugin Vulnerabilities", status: "fail", detail: "2 critical issues" },
-    { label: "Malware Detection", status: "pass", detail: "No threats found" },
-    { label: "Firewall Status", status: "warning", detail: "No WAF detected" },
-  ]
-
+// Scanner Section - Interactive Security Scanner
+function ScannerSection() {
   const features = [
     {
       icon: Server,
       title: "Infrastructure Analysis",
-      description: "We check your hosting, SSL, DNS, and server configuration for misconfigurations."
+      description: "SSL, DNS, and server configuration checks"
     },
     {
       icon: Code,
       title: "CMS & Plugin Scan",
-      description: "WordPress, Shopify, Wix — we identify outdated software and known vulnerabilities."
+      description: "WordPress, Shopify, and vulnerability detection"
     },
     {
       icon: Eye,
       title: "Threat Intelligence",
-      description: "Cross-reference your site against databases of compromised sites and blacklists."
+      description: "Blacklist and malware signature scanning"
     },
     {
       icon: ShieldCheck,
       title: "Security Headers",
-      description: "Verify your site has proper security headers to prevent common attacks."
+      description: "HTTP header configuration analysis"
     }
   ]
 
@@ -332,7 +324,7 @@ function Scanner() {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="max-w-3xl mx-auto text-center mb-16">
+        <div className="max-w-3xl mx-auto text-center mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-shield-500/10 border border-shield-500/20 rounded-full mb-6">
             <Search className="w-4 h-4 text-shield-400" />
             <span className="text-sm font-medium text-shield-400">Free Security Scanner</span>
@@ -341,103 +333,27 @@ function Scanner() {
             See What Hackers See —
             <span className="text-gradient"> In 60 Seconds</span>
           </h2>
-          <p className="text-lg text-gray-400">
+          <p className="text-lg text-gray-400 mb-8">
             Our scanner performs the same reconnaissance that attackers use to find vulnerable targets.
             Get a comprehensive security snapshot — completely free.
           </p>
-        </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Features */}
-          <div className="space-y-6">
+          {/* Feature Pills */}
+          <div className="flex flex-wrap justify-center gap-3 mb-12">
             {features.map((feature, index) => (
-              <div key={index} className="flex items-start gap-4 group">
-                <div className="p-3 bg-shield-500/10 rounded-xl group-hover:bg-shield-500/20 transition-colors">
-                  <feature.icon className="w-5 h-5 text-shield-400" />
-                </div>
-                <div>
-                  <h3 className="font-display font-semibold text-lg text-white mb-1">
-                    {feature.title}
-                  </h3>
-                  <p className="text-gray-400">
-                    {feature.description}
-                  </p>
-                </div>
+              <div
+                key={index}
+                className="flex items-center gap-2 px-4 py-2 bg-aegis-800/50 border border-white/5 rounded-full"
+              >
+                <feature.icon className="w-4 h-4 text-shield-400" />
+                <span className="text-sm text-gray-300">{feature.title}</span>
               </div>
             ))}
-
-            <div className="pt-6">
-              <a
-                href="#"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-shield-500 hover:bg-shield-400 text-white font-semibold rounded-xl transition-all shadow-lg shadow-shield-500/25"
-              >
-                <Search className="w-5 h-5" />
-                Start Your Free Scan
-              </a>
-            </div>
-          </div>
-
-          {/* Sample Report Preview */}
-          <div className="relative">
-            <div className="absolute -inset-4 bg-gradient-to-r from-shield-500/20 to-secure-500/20 rounded-3xl blur-2xl opacity-50" />
-            <div className="relative bg-aegis-800 border border-white/10 rounded-2xl overflow-hidden shadow-2xl">
-              {/* Report Header */}
-              <div className="p-4 border-b border-white/10 bg-aegis-700/50">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="w-3 h-3 rounded-full bg-critical-400" />
-                    <div className="w-3 h-3 rounded-full bg-threat-400" />
-                    <div className="w-3 h-3 rounded-full bg-secure-400" />
-                  </div>
-                  <span className="font-mono text-xs text-gray-500">example-site.com</span>
-                </div>
-              </div>
-
-              {/* Security Score */}
-              <div className="p-6 border-b border-white/10">
-                <div className="flex items-center justify-between mb-4">
-                  <span className="font-display font-semibold text-white">Security Score</span>
-                  <div className="flex items-center gap-2">
-                    <span className="font-display font-bold text-2xl text-threat-400">62</span>
-                    <span className="text-gray-500">/100</span>
-                  </div>
-                </div>
-                <div className="h-2 bg-aegis-700 rounded-full overflow-hidden">
-                  <div className="h-full w-[62%] bg-gradient-to-r from-critical-500 via-threat-500 to-threat-400 rounded-full" />
-                </div>
-                <p className="mt-2 text-sm text-threat-400">Moderate Risk — Action Required</p>
-              </div>
-
-              {/* Scan Results */}
-              <div className="p-4 space-y-3">
-                {scanResults.map((result, index) => (
-                  <div key={index} className="flex items-center justify-between py-2 px-3 bg-aegis-700/30 rounded-lg">
-                    <div className="flex items-center gap-3">
-                      {result.status === 'pass' && <CheckCircle2 className="w-4 h-4 text-secure-400" />}
-                      {result.status === 'warning' && <AlertTriangle className="w-4 h-4 text-threat-400" />}
-                      {result.status === 'fail' && <XCircle className="w-4 h-4 text-critical-400" />}
-                      <span className="text-sm text-white">{result.label}</span>
-                    </div>
-                    <span className={`text-xs font-mono ${
-                      result.status === 'pass' ? 'text-secure-400' :
-                      result.status === 'warning' ? 'text-threat-400' : 'text-critical-400'
-                    }`}>
-                      {result.detail}
-                    </span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Report Footer */}
-              <div className="p-4 border-t border-white/10 bg-aegis-700/30">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs text-gray-500">Sample Report Preview</span>
-                  <span className="text-xs text-shield-400">Full report on scan</span>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
+
+        {/* Interactive Scanner Component */}
+        <Scanner />
       </div>
     </section>
   )
@@ -868,7 +784,7 @@ export default function App() {
       <main>
         <Hero />
         <Problem />
-        <Scanner />
+        <ScannerSection />
         <AuditSection />
         <Resources />
         <Pricing />
