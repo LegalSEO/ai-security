@@ -44,6 +44,7 @@ import PricingPage from './pages/PricingPage'
 import AdminDashboard from './pages/AdminDashboard'
 import ArtOfCyberWarPage from './pages/ArtOfCyberWarPage'
 import UserDashboard from './pages/UserDashboard'
+import SecurityChecklistPage from './pages/SecurityChecklistPage'
 
 // Scroll to top on route change
 function ScrollToTop() {
@@ -73,7 +74,7 @@ function Navigation() {
             <img
               src="/images/logos/logo2.png"
               alt="Tzu Shield"
-              className="h-12 md:h-14 w-auto transition-transform group-hover:scale-105"
+              className="h-16 md:h-20 w-auto transition-transform group-hover:scale-105"
             />
           </Link>
 
@@ -133,6 +134,16 @@ function Navigation() {
                     <div>
                       <div className="text-sm font-medium text-white">Art of Cyber War</div>
                       <div className="text-xs text-gray-500">Sun Tzu's wisdom applied</div>
+                    </div>
+                  </Link>
+                  <Link
+                    to="/checklist"
+                    className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-aegis-700/50 transition-colors"
+                  >
+                    <CheckCircle2 className="w-5 h-5 text-shield-400" />
+                    <div>
+                      <div className="text-sm font-medium text-white">Security Checklist</div>
+                      <div className="text-xs text-gray-500">Step-by-step guide</div>
                     </div>
                   </Link>
                 </div>
@@ -210,6 +221,13 @@ function Navigation() {
                 onClick={() => setIsOpen(false)}
               >
                 Art of Cyber War
+              </Link>
+              <Link
+                to="/checklist"
+                className="px-4 py-3 text-gray-400 hover:text-white hover:bg-aegis-800/50 rounded-lg transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                Security Checklist
               </Link>
               <Link
                 to="/#scanner"
@@ -943,7 +961,7 @@ function Footer() {
               <img
                 src="/images/logos/logo2.png"
                 alt="Tzu Shield"
-                className="h-14 w-auto"
+                className="h-20 w-auto"
               />
             </Link>
             <p className="text-gray-400 max-w-sm mb-6">
@@ -1004,11 +1022,11 @@ function Footer() {
 // Featured Images Section
 function FeaturedSection() {
   const images = [
-    { src: '/images/top images/cyberdefense1.png', alt: 'Cyber Defense System Active', caption: 'AI-Powered Defense Systems' },
-    { src: '/images/top images/tzushield2.png', alt: 'Protected Business Owner', caption: 'Enterprise Security for Small Business' },
-    { src: '/images/top images/tzushield3.png', alt: 'Strategic Cyber Defense', caption: 'Ancient Wisdom, Modern Protection' },
-    { src: '/images/top images/cyberwar3.png', alt: 'Strategic Security', caption: 'Outsmart the Attackers' },
-    { src: '/images/top images/securityai1.png', alt: 'Security Level Up', caption: 'Level Up Your Security Posture' }
+    { src: '/images/top-images/cyberdefense1.png', alt: 'Cyber Defense System Active', caption: 'AI-Powered Defense Systems' },
+    { src: '/images/top-images/tzushield2.png', alt: 'Protected Business Owner', caption: 'Enterprise Security for Small Business' },
+    { src: '/images/top-images/tzushield3.png', alt: 'Strategic Cyber Defense', caption: 'Ancient Wisdom, Modern Protection' },
+    { src: '/images/top-images/cyberwar3.png', alt: 'Strategic Security', caption: 'Outsmart the Attackers' },
+    { src: '/images/top-images/securityai1.png', alt: 'Security Level Up', caption: 'Level Up Your Security Posture' }
   ]
 
   return (
@@ -1081,6 +1099,7 @@ export default function App() {
           <Route path="/about" element={<Layout><AboutPage /></Layout>} />
           <Route path="/pricing" element={<Layout><PricingPage /></Layout>} />
           <Route path="/art-of-cyber-war" element={<Layout><ArtOfCyberWarPage /></Layout>} />
+          <Route path="/checklist" element={<Layout><SecurityChecklistPage /></Layout>} />
 
           {/* Auth routes (no layout) */}
           <Route path="/login" element={<UserLoginPage />} />

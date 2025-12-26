@@ -231,7 +231,7 @@ export default function ArtOfCyberWarPage() {
             {/* Art of Cyber War Book */}
             <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
               <img
-                src="/images/top images/cyberwar2.png"
+                src="/images/top-images/cyberwar2.png"
                 alt="The Art of Cyber War"
                 className="w-full h-auto"
               />
@@ -240,7 +240,7 @@ export default function ArtOfCyberWarPage() {
             {/* Warrior Overlooking Cyber Landscape */}
             <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
               <img
-                src="/images/top images/tzushield3.png"
+                src="/images/top-images/tzushield3.png"
                 alt="Strategic Cyber Defense"
                 className="w-full h-auto"
               />
@@ -250,9 +250,9 @@ export default function ArtOfCyberWarPage() {
           <div className="mt-12">
             <ImageSlider
               images={[
-                { src: '/images/top images/cyberdefense1.png', alt: 'Cyber Defense Active', caption: 'Modern Defense Systems' },
-                { src: '/images/top images/cyberwar3.png', alt: 'Strategic Thinking', caption: 'Think Like a Strategist' },
-                { src: '/images/top images/cyberwar4.png', alt: 'Cyber Warfare', caption: 'The Digital Battlefield' }
+                { src: '/images/top-images/cyberdefense1.png', alt: 'Cyber Defense Active', caption: 'Modern Defense Systems' },
+                { src: '/images/top-images/cyberwar3.png', alt: 'Strategic Thinking', caption: 'Think Like a Strategist' },
+                { src: '/images/top-images/cyberwar4.png', alt: 'Cyber Warfare', caption: 'The Digital Battlefield' }
               ]}
               autoPlay={true}
               interval={6000}
