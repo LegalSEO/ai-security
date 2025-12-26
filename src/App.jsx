@@ -33,6 +33,7 @@ import {
 import { Scanner } from './components/Scanner'
 import { ExitIntentPopup, InlineEmailCapture } from './components/EmailCapture'
 import { AuthProvider, AdminRoute, UserRoute, AdminLoginPage, UserLoginPage, UserHeader, useAuth } from './components/Auth'
+import { ImageSlider, GallerySlider } from './components/ImageSlider'
 
 // Page imports
 import ThreatsPage from './pages/ThreatsPage'
@@ -70,9 +71,9 @@ function Navigation() {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">
             <img
-              src="/images/logos/logo1.png"
+              src="/images/logos/logo2.png"
               alt="Tzu Shield"
-              className="h-10 md:h-12 w-auto transition-transform group-hover:scale-105"
+              className="h-12 md:h-14 w-auto transition-transform group-hover:scale-105"
             />
           </Link>
 
@@ -940,9 +941,9 @@ function Footer() {
           <div className="md:col-span-2">
             <Link to="/" className="inline-block mb-4">
               <img
-                src="/images/logos/logo1.png"
+                src="/images/logos/logo2.png"
                 alt="Tzu Shield"
-                className="h-12 w-auto"
+                className="h-14 w-auto"
               />
             </Link>
             <p className="text-gray-400 max-w-sm mb-6">
@@ -1000,12 +1001,51 @@ function Footer() {
   )
 }
 
+// Featured Images Section
+function FeaturedSection() {
+  const images = [
+    { src: '/images/top images/cyberdefense1.png', alt: 'Cyber Defense System Active', caption: 'AI-Powered Defense Systems' },
+    { src: '/images/top images/tzushield2.png', alt: 'Protected Business Owner', caption: 'Enterprise Security for Small Business' },
+    { src: '/images/top images/tzushield3.png', alt: 'Strategic Cyber Defense', caption: 'Ancient Wisdom, Modern Protection' },
+    { src: '/images/top images/cyberwar3.png', alt: 'Strategic Security', caption: 'Outsmart the Attackers' },
+    { src: '/images/top images/securityai1.png', alt: 'Security Level Up', caption: 'Level Up Your Security Posture' }
+  ]
+
+  return (
+    <section className="relative py-16 md:py-24 overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-aegis-800/50 via-aegis-900 to-aegis-800/50" />
+
+      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h2 className="font-display font-bold text-2xl md:text-3xl text-white mb-4">
+            The Art of <span className="text-gradient">Cyber Defense</span>
+          </h2>
+          <p className="text-gray-400 max-w-2xl mx-auto">
+            "Know your enemy and know yourself, and you can fight a hundred battles without disaster." — Sun Tzu
+          </p>
+        </div>
+
+        <ImageSlider
+          images={images}
+          autoPlay={true}
+          interval={5000}
+          showArrows={true}
+          showDots={true}
+          aspectRatio="16/9"
+          className="border border-white/10 shadow-2xl shadow-shield-500/10"
+        />
+      </div>
+    </section>
+  )
+}
+
 // Home Page Component
 function HomePage() {
   return (
     <>
       <Hero />
       <Problem />
+      <FeaturedSection />
       <ScannerSection />
       <AuditSection />
       <Resources />

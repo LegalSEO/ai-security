@@ -18,6 +18,7 @@ import {
   Wind,
   Droplets
 } from 'lucide-react'
+import { ImageSlider } from '../components/ImageSlider'
 
 // Sun Tzu quotes mapped to cybersecurity principles
 const strategicPrinciples = [
@@ -217,6 +218,47 @@ export default function ArtOfCyberWarPage() {
                 responses before hackers strike.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Images */}
+      <section className="relative py-16 md:py-24 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-aegis-900 via-aegis-800/30 to-aegis-900" />
+
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            {/* Art of Cyber War Book */}
+            <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+              <img
+                src="/images/top images/cyberwar2.png"
+                alt="The Art of Cyber War"
+                className="w-full h-auto"
+              />
+            </div>
+
+            {/* Warrior Overlooking Cyber Landscape */}
+            <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+              <img
+                src="/images/top images/tzushield3.png"
+                alt="Strategic Cyber Defense"
+                className="w-full h-auto"
+              />
+            </div>
+          </div>
+
+          <div className="mt-12">
+            <ImageSlider
+              images={[
+                { src: '/images/top images/cyberdefense1.png', alt: 'Cyber Defense Active', caption: 'Modern Defense Systems' },
+                { src: '/images/top images/cyberwar3.png', alt: 'Strategic Thinking', caption: 'Think Like a Strategist' },
+                { src: '/images/top images/cyberwar4.png', alt: 'Cyber Warfare', caption: 'The Digital Battlefield' }
+              ]}
+              autoPlay={true}
+              interval={6000}
+              aspectRatio="21/9"
+              className="border border-white/10"
+            />
           </div>
         </div>
       </section>
