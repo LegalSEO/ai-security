@@ -142,11 +142,24 @@ export default function AboutPage() {
 
       {/* Mission Statement */}
       <section className="relative py-16 md:py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="prose prose-invert prose-lg max-w-none">
-            <h2 className="font-display font-bold text-2xl md:text-3xl text-white mb-6">
-              Our Mission
-            </h2>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            {/* Image */}
+            <div className="order-2 md:order-1">
+              <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+                <img
+                  src="/images/aef78b55-3408-4891-a80b-f30e6c167c2d.png"
+                  alt="AI-Powered Security Protection"
+                  className="w-full h-auto"
+                />
+              </div>
+            </div>
+
+            {/* Content */}
+            <div className="order-1 md:order-2 prose prose-invert prose-lg max-w-none">
+              <h2 className="font-display font-bold text-2xl md:text-3xl text-white mb-6">
+                Our Mission
+              </h2>
             <p className="text-gray-400 text-lg mb-6">
               The cybersecurity industry has a problem: it's built for enterprises with dedicated IT teams and six-figure budgets. Small businesses and solopreneurs are left to fend for themselves, often unaware of the risks they face until it's too late.
             </p>
@@ -156,6 +169,7 @@ export default function AboutPage() {
             <p className="text-gray-400 text-lg">
               We started Tzu Shield because we saw too many small businesses get hurt by preventable attacks. Businesses that didn't know their WordPress was vulnerable, that their contact form was exposed, or that their SSL certificate had expired. We're here to make sure that doesn't happen to you.
             </p>
+            </div>
           </div>
         </div>
       </section>

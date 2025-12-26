@@ -246,6 +246,16 @@ export default function WordPressSecurityPage() {
           <h2 className="font-display font-bold text-2xl md:text-3xl text-white mb-6 text-center">
             The WordPress Paradox
           </h2>
+
+          {/* Featured Image */}
+          <div className="mb-8 rounded-2xl overflow-hidden border border-white/10">
+            <img
+              src="/images/wordpress/444cf93e-ebf1-4e1f-a18d-639a72f42bc0.png"
+              alt="WordPress Security Vulnerabilities"
+              className="w-full h-auto"
+            />
+          </div>
+
           <div className="prose prose-invert prose-lg max-w-none">
             <p className="text-gray-400 mb-6">
               WordPress is incredibly easy to set up. That's the problem. What takes minutes to install takes constant effort to secure. And most small business owners don't have the time, expertise, or awareness to maintain proper security.

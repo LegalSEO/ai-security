@@ -68,14 +68,12 @@ function Navigation() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group">
-            <div className="relative">
-              <Shield className="w-8 h-8 text-shield-400 transition-transform group-hover:scale-110" />
-              <div className="absolute inset-0 bg-shield-400/20 blur-xl rounded-full" />
-            </div>
-            <span className="font-display font-bold text-xl tracking-tight">
-              Tzu<span className="text-shield-400">Shield</span>
-            </span>
+          <Link to="/" className="flex items-center gap-2 group">
+            <img
+              src="/images/logos/logo1.png"
+              alt="Tzu Shield"
+              className="h-10 md:h-12 w-auto transition-transform group-hover:scale-105"
+            />
           </Link>
 
           {/* Desktop Nav */}
@@ -940,11 +938,12 @@ function Footer() {
         <div className="grid md:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
           <div className="md:col-span-2">
-            <Link to="/" className="flex items-center gap-3 mb-4">
-              <Shield className="w-8 h-8 text-shield-400" />
-              <span className="font-display font-bold text-xl">
-                Tzu<span className="text-shield-400">Shield</span>
-              </span>
+            <Link to="/" className="inline-block mb-4">
+              <img
+                src="/images/logos/logo1.png"
+                alt="Tzu Shield"
+                className="h-12 w-auto"
+              />
             </Link>
             <p className="text-gray-400 max-w-sm mb-6">
               "The supreme art of war is to subdue the enemy without fighting."
