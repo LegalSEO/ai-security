@@ -39,6 +39,7 @@ import { ImageSlider, GallerySlider } from './components/ImageSlider'
 import ThreatsPage from './pages/ThreatsPage'
 import WordPressSecurityPage from './pages/WordPressSecurityPage'
 import ResourcesPage from './pages/ResourcesPage'
+import ResourceDetailPage from './pages/ResourceDetailPage'
 import AboutPage from './pages/AboutPage'
 import PricingPage from './pages/PricingPage'
 import AdminDashboard from './pages/AdminDashboard'
@@ -72,7 +73,7 @@ function Navigation() {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group">
             <img
-              src="/images/logos/logo2.png"
+              src="/images/logos/logo3.png"
               alt="Tzu Shield"
               className="h-16 md:h-20 w-auto transition-transform group-hover:scale-105"
             />
@@ -959,7 +960,7 @@ function Footer() {
           <div className="md:col-span-2">
             <Link to="/" className="inline-block mb-4">
               <img
-                src="/images/logos/logo2.png"
+                src="/images/logos/logo3.png"
                 alt="Tzu Shield"
                 className="h-20 w-auto"
               />
@@ -1096,6 +1097,7 @@ export default function App() {
           <Route path="/threats" element={<Layout><ThreatsPage /></Layout>} />
           <Route path="/wordpress-security" element={<Layout><WordPressSecurityPage /></Layout>} />
           <Route path="/resources" element={<Layout><ResourcesPage /></Layout>} />
+          <Route path="/resources/:slug" element={<Layout><ResourceDetailPage /></Layout>} />
           <Route path="/about" element={<Layout><AboutPage /></Layout>} />
           <Route path="/pricing" element={<Layout><PricingPage /></Layout>} />
           <Route path="/art-of-cyber-war" element={<Layout><ArtOfCyberWarPage /></Layout>} />

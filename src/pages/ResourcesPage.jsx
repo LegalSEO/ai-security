@@ -67,11 +67,14 @@ function CategoryFilter({ categories, active, onChange }) {
 }
 
 // Resource Card
-function ResourceCard({ resource, onDownload }) {
+function ResourceCard({ resource }) {
   const TypeIcon = resource.type === 'ebook' ? BookOpen : resource.type === 'video' ? Video : FileText
 
   return (
-    <div className="bg-aegis-800/30 border border-white/5 rounded-2xl overflow-hidden hover:border-shield-500/30 transition-all group">
+    <Link
+      to={`/resources/${resource.slug}`}
+      className="bg-aegis-800/30 border border-white/5 rounded-2xl overflow-hidden hover:border-shield-500/30 transition-all group block"
+    >
       {/* Thumbnail */}
       <div className={`h-48 relative ${resource.gradient} flex items-center justify-center`}>
         <TypeIcon className="w-16 h-16 text-white/20" />
@@ -105,24 +108,18 @@ function ResourceCard({ resource, onDownload }) {
 
         {/* CTA */}
         {resource.premium ? (
-          <button
-            onClick={() => onDownload(resource)}
-            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-threat-500/10 hover:bg-threat-500/20 border border-threat-500/30 text-threat-400 font-medium text-sm rounded-lg transition-all"
-          >
+          <div className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-threat-500/10 border border-threat-500/30 text-threat-400 font-medium text-sm rounded-lg">
             <Crown className="w-4 h-4" />
-            Unlock for ${resource.price}
-          </button>
+            ${resource.price} - Learn More
+          </div>
         ) : (
-          <button
-            onClick={() => onDownload(resource)}
-            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-shield-500/10 hover:bg-shield-500/20 border border-shield-500/30 text-shield-400 font-medium text-sm rounded-lg transition-all"
-          >
-            <Download className="w-4 h-4" />
-            Free Download
-          </button>
+          <div className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-shield-500/10 border border-shield-500/30 text-shield-400 font-medium text-sm rounded-lg">
+            <ArrowRight className="w-4 h-4" />
+            Learn More
+          </div>
         )}
       </div>
-    </div>
+    </Link>
   )
 }
 
@@ -203,8 +200,6 @@ function EmailCaptureModal({ resource, isOpen, onClose, onSubmit }) {
 
 export default function ResourcesPage() {
   const [activeCategory, setActiveCategory] = useState('all')
-  const [modalOpen, setModalOpen] = useState(false)
-  const [selectedResource, setSelectedResource] = useState(null)
 
   const categories = [
     { id: 'all', label: 'All Resources' },
@@ -217,6 +212,7 @@ export default function ResourcesPage() {
   const resources = [
     {
       id: 1,
+      slug: 'website-security-101',
       title: "Website Security 101: A Non-Technical Guide",
       description: "Everything you need to know about website security, explained in plain English. Perfect for business owners who want to understand the basics.",
       category: "basics",
@@ -227,6 +223,7 @@ export default function ResourcesPage() {
     },
     {
       id: 2,
+      slug: 'ai-threat-landscape-2025',
       title: "The AI Threat Landscape 2025",
       description: "A comprehensive overview of how AI is being weaponized by hackers, with real examples and defense strategies.",
       category: "basics",
@@ -237,6 +234,7 @@ export default function ResourcesPage() {
     },
     {
       id: 3,
+      slug: 'wordpress-security-checklist',
       title: "WordPress Security Hardening Checklist",
       description: "Step-by-step checklist to secure your WordPress site. Covers updates, plugins, passwords, backups, and more.",
       category: "wordpress",
@@ -247,6 +245,7 @@ export default function ResourcesPage() {
     },
     {
       id: 4,
+      slug: 'plugin-security-audit',
       title: "Plugin Security Audit Template",
       description: "A spreadsheet template to audit all your WordPress plugins for security risks, update status, and necessity.",
       category: "wordpress",
@@ -257,6 +256,7 @@ export default function ResourcesPage() {
     },
     {
       id: 5,
+      slug: 'migrating-from-wordpress',
       title: "Migrating Away from WordPress: Complete Guide",
       description: "Detailed guide on moving from WordPress to modern alternatives. Covers static sites, headless CMS, and managed solutions.",
       category: "wordpress",
@@ -267,6 +267,7 @@ export default function ResourcesPage() {
     },
     {
       id: 6,
+      slug: 'small-business-cybersecurity-blueprint',
       title: "Small Business Cybersecurity Blueprint",
       description: "A complete security framework designed for small businesses. Prioritized actions based on your budget and resources.",
       category: "small-business",
@@ -277,6 +278,7 @@ export default function ResourcesPage() {
     },
     {
       id: 7,
+      slug: 'incident-response-plan',
       title: "Incident Response Plan Template",
       description: "What to do when (not if) you get hacked. Customizable template with step-by-step procedures for small teams.",
       category: "small-business",
@@ -287,6 +289,7 @@ export default function ResourcesPage() {
     },
     {
       id: 8,
+      slug: 'employee-security-training',
       title: "Employee Security Training Slides",
       description: "Ready-to-use presentation for training your team on phishing, passwords, and security best practices.",
       category: "small-business",
@@ -297,6 +300,7 @@ export default function ResourcesPage() {
     },
     {
       id: 9,
+      slug: 'security-headers-guide',
       title: "Security Headers Configuration Guide",
       description: "Technical deep-dive into HTTP security headers. Includes copy-paste configurations for common setups.",
       category: "technical",
@@ -307,6 +311,7 @@ export default function ResourcesPage() {
     },
     {
       id: 10,
+      slug: 'ssl-tls-best-practices',
       title: "SSL/TLS Best Practices",
       description: "Everything about SSL certificates, HTTPS configuration, and encryption best practices for your website.",
       category: "technical",
@@ -317,6 +322,7 @@ export default function ResourcesPage() {
     },
     {
       id: 11,
+      slug: 'waf-setup-guide',
       title: "Web Application Firewall Setup",
       description: "Guide to implementing and configuring a WAF for your website. Covers Cloudflare, AWS WAF, and more.",
       category: "technical",
@@ -327,6 +333,7 @@ export default function ResourcesPage() {
     },
     {
       id: 12,
+      slug: 'security-audit-methodology',
       title: "Complete Security Audit Methodology",
       description: "Professional-grade methodology for auditing website security. Used by our team for client assessments.",
       category: "technical",
@@ -340,21 +347,6 @@ export default function ResourcesPage() {
   const filteredResources = activeCategory === 'all'
     ? resources
     : resources.filter(r => r.category === activeCategory)
-
-  const handleDownload = (resource) => {
-    if (resource.premium) {
-      // In production, this would open a payment flow
-      alert(`This would open payment for ${resource.title} at $${resource.price}`)
-    } else {
-      setSelectedResource(resource)
-      setModalOpen(true)
-    }
-  }
-
-  const handleEmailSubmit = (email) => {
-    console.log(`Sending ${selectedResource?.title} to ${email}`)
-    // In production, this would trigger email delivery
-  }
 
   return (
     <div className="min-h-screen">
@@ -383,7 +375,6 @@ export default function ResourcesPage() {
               <ResourceCard
                 key={resource.id}
                 resource={resource}
-                onDownload={handleDownload}
               />
             ))}
           </div>
@@ -445,14 +436,6 @@ export default function ResourcesPage() {
           </div>
         </div>
       </section>
-
-      {/* Email Capture Modal */}
-      <EmailCaptureModal
-        resource={selectedResource}
-        isOpen={modalOpen}
-        onClose={() => setModalOpen(false)}
-        onSubmit={handleEmailSubmit}
-      />
     </div>
   )
 }
